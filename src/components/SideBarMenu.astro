@@ -1,0 +1,35 @@
+---
+const { sideBarActiveItemID } = Astro.props;
+const activeClass = "bg-base-300"; // For primary color replace with `active` class
+---
+
+<ul class="menu grow shrink menu-md overflow-y-auto gap-1">
+    <li>
+        <a class="flex py-3 px-4 rounded-lg transition-all duration-200 hover:bg-blue-500/10 hover:text-blue-400 font-sans font-medium items-center gap-3 group" id="home" href="/">
+            <span class="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-blue-400 transition-colors"></span>
+            Home
+        </a>
+    </li>
+    <li>
+        <a class="flex py-3 px-4 rounded-lg transition-all duration-200 hover:bg-blue-500/10 hover:text-blue-400 font-sans font-medium items-center gap-3 group" id="projects" href="/projects">
+            <span class="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-blue-400 transition-colors"></span>
+            Projects
+        </a>
+    </li>
+    <li>
+        <a class="flex py-3 px-4 rounded-lg transition-all duration-200 hover:bg-blue-500/10 hover:text-blue-400 font-sans font-medium items-center gap-3 group" id="blog" href="/blog/">
+            <span class="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-blue-400 transition-colors"></span>
+            Blog
+        </a>
+    </li>
+    <li>
+        <a class="flex py-3 px-4 rounded-lg transition-all duration-200 hover:bg-blue-500/10 hover:text-blue-400 font-sans font-medium items-center gap-3 group" id="cv" href="/cv">
+            <span class="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-blue-400 transition-colors"></span>
+            CV
+        </a>
+    </li>
+</ul>
+<script define:vars={{ sideBarActiveItemID: sideBarActiveItemID, activeClass: activeClass }}>
+const activeItemElem = document.getElementById(sideBarActiveItemID);
+activeItemElem && activeItemElem.classList.add(activeClass);
+</script>

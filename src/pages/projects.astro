@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { getCollection } from "astro:content";
+
+// 1. Fetch all projects
+const allProjects = await getCollection("projects");
+
+// 2. Sort them (Newest first)
+const sortedProjects = allProjects.sort(
+  (a, b) => (b.data.pubDate?.valueOf() || 0) - (a.data.pubDate?.valueOf() || 0)
+);
+
+// 3. Filter by Category
+const awsProjects = sortedProjects.filter(p => p.data.category === "AWS");
+const gcpProjects = sortedProjects.filter(p => p.data.category === "GCP");
+const otherProjects = sortedProjects.filter(p => p.data.category !== "AWS" && p.data.category !== "GCP");
+---
+
+<BaseLayout title="Projects | Sahil K." sideBarActiveItemID="projects">
+  <div>
+    <div class="text-3xl w-full font-bold mb-5">Projects Portfolio</div>
+  </div>
+
+  {awsProjects.length > 0 && (
+    <div class="flex items-center gap-4 mt-16 mb-8">
+      <h2 class="text-2xl font-bold font-mono text-blue-400 bg-blue-500/5 px-4 py-1 border-l-4 border-blue-500">
+        01. AWS_CLOUD_INFRA
+      </h2>
+      <div class="h-[1px] grow bg-slate-800"></div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {awsProjects.map((project) => (
+        <ProjectCard
+          title={project.data.title}
+          description={project.data.description}
+          tags={project.data.tags}
+          url={`/projects/${project.slug}`}
+          status={project.data.status}
+          category={project.data.category} 
+        />
+      ))}
+    </div>
+  )}
+
+  {gcpProjects.length > 0 && (
+    <div class="flex items-center gap-4 mt-16 mb-8">
+      <h2 class="text-2xl font-bold font-mono text-emerald-400 bg-emerald-500/5 px-4 py-1 border-l-4 border-emerald-500">
+        02. GCP_INFRASTRUCTURE
+      </h2>
+      <div class="h-[1px] grow bg-slate-800"></div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {gcpProjects.map((project) => (
+        <ProjectCard
+          title={project.data.title}
+          description={project.data.description}
+          tags={project.data.tags}
+          url={`/projects/${project.slug}`}
+          status={project.data.status}
+          category={project.data.category}
+        />
+      ))}
+    </div>
+  )}
+
+  {otherProjects.length > 0 && (
+    <div class="flex items-center gap-4 mt-16 mb-8">
+      <h2 class="text-2xl font-bold font-mono text-slate-400 bg-slate-500/5 px-4 py-1 border-l-4 border-slate-500">
+        03. ARCHITECTURE_&_LOGIC
+      </h2>
+      <div class="h-[1px] grow bg-slate-800"></div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {otherProjects.map((project) => (
+        <ProjectCard
+          title={project.data.title}
+          description={project.data.description}
+          tags={project.data.tags}
+          url={`/projects/${project.slug}`}
+          status={project.data.status}
+          category={project.data.category}
+        />
+      ))}
+    </div>
+  )}
+</BaseLayout>

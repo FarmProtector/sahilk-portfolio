@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter Variable', sans-serif;
+  }
+  
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+.time-line-container>div:last-child .education__time>.education__line {
+    display: none;
+}
+
+/* This targets the scrollbar specifically in Webkit browsers (Chrome, Edge, Brave) */
+::-webkit-scrollbar {
+  width: 12px !important; /* Made it wider so it's obvious */
+}
+
+::-webkit-scrollbar-track {
+  background: #020617 !important; /* Very dark blue-black */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b !important; /* Slate-800 */
+  border-radius: 100px !important;
+  border: 3px solid #020617 !important; /* Creates a "floating" effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6 !important; /* Bright Blue on hover */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1e293b #020617;
+}

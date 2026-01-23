@@ -1,0 +1,43 @@
+---
+// These are the "Props" - the inputs for your script
+const { title, description, tags, url, category, status = "Completed" } = Astro.props;
+---
+
+<div class="p-6 bg-slate-900 border border-slate-800 rounded-xl transition-all duration-300 hover:scale-[101%] hover:border-blue-500/40 hover:shadow-[0_0_20px_rgba(59,130,246,0.1)] group">  <div class="flex justify-between items-start mb-4">
+    <h3 class="text-xl font-bold font-sans group-hover:text-blue-400 transition-colors">
+      {title}
+    </h3>
+    <span class="text-[10px] font-mono px-2 py-1 bg-blue-500/10 text-blue-400 border border-blue-400/20 rounded">
+      {status}
+    </span>
+  </div>
+
+<div class="flex items-center gap-4 mb-3 text-[11px] font-mono text-slate-500">
+  <div class="flex items-center gap-1">
+    <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+    {category}
+  </div>
+  <div class="flex items-center gap-1 uppercase">
+    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+    {status}
+  </div>
+</div>
+
+  <p class="text-slate-400 text-sm mb-4 font-sans leading-relaxed">
+    {description}
+  </p>
+
+  <div class="flex flex-wrap gap-2 mb-6">
+    {tags.map((tag) => (
+      <span class="text-[11px] font-mono text-slate-300 bg-slate-800 px-2 py-0.5 rounded">
+        {tag}
+      </span>
+    ))}
+  </div>
+
+  <a href={url} class="text-sm font-mono text-blue-400 hover:underline flex items-center gap-1">
+    View Documentation <span>→</span>
+  </a>
+</div>
+
+
