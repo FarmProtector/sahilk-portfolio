@@ -12,7 +12,9 @@ Check out the live deployment at: [sahilk.io](https://sahilk.io)
     - **Storage:** Amazon S3
     - **CDN:** Amazon CloudFront (Edge Functions for routing)
     - **Deployment:** AWS CLI & CI/CD Pipeline
-- **Certifications:** - AWS Certified Solutions Architect Associate (SAA-C03)
+- **Certifications:**
+    - AWS Certified Solutions Architect Associate (SAA-C03)
+    - AWS Certified Security Specialty (SCS-C03) 
     - CompTIA Security+
     - ISC2 Certified in Cybersecurity (CC)
 
