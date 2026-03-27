@@ -1,7 +1,7 @@
 ---
 title: "Website Delivery with Cloudfront"
 category: "AWS"
-description: "How to create a Virtual Private Cloud in AWS"
+description: "How to use Cloudfront to deliver a Website globally"
 tags: ["AWS", "Cloudfront", "Cloud Architecture", "S3"]
 status: "Verified"
 pubDate: 2026-01-23

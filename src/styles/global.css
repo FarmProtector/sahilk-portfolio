@@ -17,21 +17,21 @@
 
 /* This targets the scrollbar specifically in Webkit browsers (Chrome, Edge, Brave) */
 ::-webkit-scrollbar {
-  width: 12px !important; /* Made it wider so it's obvious */
+  width: 12px !important; 
 }
 
 ::-webkit-scrollbar-track {
-  background: #020617 !important; /* Very dark blue-black */
+  background: #020617 !important; 
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b !important; /* Slate-800 */
+  background: #1e293b !important; 
   border-radius: 100px !important;
-  border: 3px solid #020617 !important; /* Creates a "floating" effect */
+  border: 3px solid #020617 !important; 
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b82f6 !important; /* Bright Blue on hover */
+  background: #3b82f6 !important; 
 }
 
 /* For Firefox */

@@ -1,43 +1,105 @@
 ---
 import { type BlogSchema } from "../content/config";
+import type { MarkdownHeading } from "astro";
 import BaseLayout from "./BaseLayout.astro";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
-
-export interface Props extends BlogSchema {}
-
-const { title, description, pubDate, updatedDate, heroImage, badge, tags = [] } = Astro.props;
-dayjs.extend(localizedFormat);
-const displayDate = dayjs(pubDate).format("ll")
 import { Image } from "astro:assets";
+
+export interface Props extends BlogSchema {
+  headings: MarkdownHeading[];
+}
+
+const { title, description, pubDate, updatedDate, heroImage, badge, tags = [], headings } = Astro.props;
+
+dayjs.extend(localizedFormat);
+const displayDate = dayjs(pubDate).format("ll");
 ---
 
-<BaseLayout title={title} description={description} image={heroImage}, ogType="article">
-  <main class="md:flex md:justify-center">
+<BaseLayout title={title} description={description} image={heroImage} ogType="article">
+  <main class="md:flex md:justify-center gap-12 px-4 md:px-0">
     <article class="prose prose-lg max-w-[750px] prose-img:mx-auto">
-      {heroImage && <Image width={750} height={422} format="webp" src={heroImage} alt={title} class="w-full mb-6" />}
-      <h1 class="title my-2 text-4xl font-bold">{title}</h1>
-      {pubDate && <time>{displayDate}</time>}
-      <br />
-      {badge && <div class="badge badge-secondary my-1">{badge}</div>}
-      {
-        tags &&
-          tags.map((tag) => (
-            <a href={`/blog/tag/${tag}`} class="badge badge-outline ml-2 no-underline">
-              {tag}
-            </a>
-          ))
-      }
+      {heroImage && <Image width={750} height={422} format="webp" src={heroImage} alt={title} class="w-full mb-6 rounded-xl" />}
+      
+      <h1 class="text-5xl font-bold mb-2">{title}</h1>
+
+      <div class="flex flex-wrap items-center gap-4 mb-4">
+        {pubDate && <time class="text-sm font-mono opacity-60">{displayDate}</time>}
+        
+        {badge && (
+          <div class="badge border-primary/30 bg-primary/10 text-primary px-3 py-3 font-mono text-[10px] uppercase tracking-wider">
+            {badge}
+          </div>
+        )}
+
+        <span class="text-sm font-mono opacity-20">|</span>
+
+        <span class="flex items-center gap-1 text-sm font-mono opacity-60">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          5 min read
+        </span>
+      </div>
+
+      <div class="flex flex-wrap gap-2 mb-6">
+        {
+          tags &&
+            tags.map((tag) => (
+              <a href={`/blog/tag/${tag}`} class="badge border-white/10 bg-white/5 text-white/50 hover:border-primary hover:text-primary transition-all font-mono text-[10px] no-underline py-3 px-3">
+                #{tag}
+              </a>
+            ))
+        }
+      </div>
+
       {
         updatedDate && (
-          <div>
-            {" "}
-            Last updated on <time>{updatedDate}</time>{" "}
+          <div class="text-xs italic opacity-50 mb-4">
+            Last updated on <time>{updatedDate}</time>
           </div>
         )
       }
-      <div class="divider my-2"></div>
+
+      <div class="divider my-4 opacity-10"></div>
+      
       <slot />
     </article>
+
+    <aside class="hidden xl:block sticky top-24 self-start w-64">
+      <nav class="toc">
+        <h2 class="text-xs font-bold uppercase tracking-widest opacity-30 mb-4 font-mono">Table of Contents</h2>
+        <ul class="space-y-3 border-l border-primary/10 pl-4">
+          {headings && headings.filter(h => h.depth <= 3).map((heading) => (
+            <li class={`toc-item depth-${heading.depth}`}>
+              <a 
+                href={`#${heading.slug}`} 
+                class="block text-[13px] opacity-50 hover:opacity-100 hover:text-primary transition-all font-mono no-underline"
+              >
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
   </main>
 </BaseLayout>
+
+<style is:global>
+  /* Indent H3 headers in the TOC */
+  .depth-3 {
+    margin-left: 1rem;
+    opacity: 0.7;
+  }
+  
+  /* Smooth Scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Offset for headers when clicking TOC links */
+  h2, h3 {
+    scroll-margin-top: 100px;
+  }
+</style>
