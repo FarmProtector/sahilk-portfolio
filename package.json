@@ -8,7 +8,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "astro build && aws s3 sync ./dist s3://sahilk.io --delete && aws cloudfront create-invalidation --distribution-id EDNH7DEQVT3BQ --paths '/*'"
   },
   "dependencies": {
     "@astrojs/mdx": "^2.0.3",
