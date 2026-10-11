@@ -1,0 +1,23 @@
+---
+title: "Threat Detection with GuardDuty"
+category: "AWS"
+description: "Attacked an intentionally vulnerable web app with SQL and command injection, used the exposed EC2 credentials to access S3, then investigated the GuardDuty findings."
+tags: ["GuardDuty", "AWS", "S3", "CloudShell", "Threat Detection"]
+status: "Verified"
+pubDate: 2026-10-11
+custom_link: "https://github.com/FarmProtector/aws-projects/tree/main/02-aws-guardduty-threat-detection"
+---
+
+## Introducing This Project
+
+I deployed an insecure web app (OWASP Juice Shop) with CloudFormation and attacked it to see how GuardDuty detects real attack techniques. I bypassed the login with SQL injection, used command injection to expose the EC2 instance's credentials, then used those credentials in CloudShell to steal a secret file from an S3 bucket. GuardDuty reported the credential exfiltration within 10 minutes, and I investigated the finding to trace what was accessed and from where.
+
+### Tools and Concepts
+
+GuardDuty, CloudFormation, EC2, S3, CloudShell, SQL injection, command injection, input sanitization, credential exfiltration, and GuardDuty Malware Protection.
+
+### Project Reflection
+
+The most challenging part was getting access to the victim's AWS environment using a profile built from the exposed credentials. It was most rewarding to retrieve the secret file from the victim's S3 bucket and then see the same activity show up as a GuardDuty finding, UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration.InsideAWS, which showed the S3 GetObject call and the attacker's IP address and location. As an extension, I enabled Malware Protection and uploaded an EICAR test file, which instantly triggered an Object:S3/MaliciousFile finding.
+
+[View full write-up on GitHub →](https://github.com/FarmProtector/aws-projects/tree/main/02-aws-guardduty-threat-detection)
