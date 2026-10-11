@@ -140,14 +140,15 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-		"blog": Record<string, {
-  id: string;
-  slug: string;
+		"blog": {
+"currently-learning.md": {
+	id: "currently-learning.md";
+  slug: "currently-learning";
   body: string;
   collection: "blog";
-  data: InferEntrySchema<"blog">;
-  render(): Render[".md"];
-}>;
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+};
 "projects": {
 "aws-networks-cloudfront.md": {
 	id: "aws-networks-cloudfront.md";
@@ -173,6 +174,48 @@ declare module 'astro:content' {
 "aws-security-kms.md": {
 	id: "aws-security-kms.md";
   slug: "aws-security-kms";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"aws-security-secrets-lambda.md": {
+	id: "aws-security-secrets-lambda.md";
+  slug: "aws-security-secrets-lambda";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"azure-sentinel-analytics-rule.md": {
+	id: "azure-sentinel-analytics-rule.md";
+  slug: "azure-sentinel-analytics-rule";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"azure-sentinel-geomap.md": {
+	id: "azure-sentinel-geomap.md";
+  slug: "azure-sentinel-geomap";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"azure-threat-hunt-ir.md": {
+	id: "azure-threat-hunt-ir.md";
+  slug: "azure-threat-hunt-ir";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"azure-zero-trust-conditional-access.md": {
+	id: "azure-zero-trust-conditional-access.md";
+  slug: "azure-zero-trust-conditional-access";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"vulnerability-management-program.md": {
+	id: "vulnerability-management-program.md";
+  slug: "vulnerability-management-program";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">

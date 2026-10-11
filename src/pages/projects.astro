@@ -12,9 +12,10 @@ const sortedProjects = allProjects.sort(
 );
 
 // 3. Filter by Category
+const azureProjects = sortedProjects.filter(p => p.data.category === "Azure");
 const awsProjects = sortedProjects.filter(p => p.data.category === "AWS");
 const gcpProjects = sortedProjects.filter(p => p.data.category === "GCP");
-const otherProjects = sortedProjects.filter(p => p.data.category !== "AWS" && p.data.category !== "GCP");
+const otherProjects = sortedProjects.filter(p => p.data.category !== "AWS" && p.data.category !== "GCP" && p.data.category !== "Azure");
 ---
 
 <BaseLayout title="Projects | Sahil K." sideBarActiveItemID="projects">
@@ -24,9 +25,9 @@ const otherProjects = sortedProjects.filter(p => p.data.category !== "AWS" && p.
 
   {awsProjects.length > 0 && (
     <div class="flex items-center gap-4 mt-16 mb-8">
-      <h2 class="text-2xl font-bold font-mono text-blue-400 bg-blue-500/5 px-4 py-1 border-l-4 border-blue-500">
-        01. AWS_CLOUD_INFRA
-      </h2>
+    <h2 class="text-2xl font-bold font-mono px-4 py-1 border-l-4" style="color: #FF9900; background-color: rgba(255, 153, 0, 0.05); border-color: #FF9900;">
+      01. AWS_CLOUD_INFRA
+    </h2>
       <div class="h-[1px] grow bg-slate-800"></div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -42,11 +43,30 @@ const otherProjects = sortedProjects.filter(p => p.data.category !== "AWS" && p.
       ))}
     </div>
   )}
-
+{azureProjects.length > 0 && (
+  <div class="flex items-center gap-4 mt-16 mb-8">
+    <h2 class="text-2xl font-bold font-mono px-4 py-1 border-l-4" style="color: #0078D4; background-color: rgba(0, 120, 212, 0.05); border-color: #0078D4;">
+      02. AZURE_SECURITY_OPS
+    </h2>
+    <div class="h-[1px] grow bg-slate-800"></div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {azureProjects.map((project) => (
+      <ProjectCard
+        title={project.data.title}
+        description={project.data.description}
+        tags={project.data.tags}
+        url={`/projects/${project.slug}`}
+        status={project.data.status}
+        category={project.data.category}
+      />
+    ))}
+  </div>
+)}
   {gcpProjects.length > 0 && (
     <div class="flex items-center gap-4 mt-16 mb-8">
-      <h2 class="text-2xl font-bold font-mono text-emerald-400 bg-emerald-500/5 px-4 py-1 border-l-4 border-emerald-500">
-        02. GCP_INFRASTRUCTURE
+      <h2 class="text-2xl font-bold font-mono px-4 py-1 border-l-4" style="color: #34A853; background-color: rgba(52, 168, 83, 0.05); border-color: #34A853;">
+        03. GCP_INFRASTRUCTURE
       </h2>
       <div class="h-[1px] grow bg-slate-800"></div>
     </div>
